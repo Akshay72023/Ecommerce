@@ -1,7 +1,6 @@
-import React from "react";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <div>
       <Navbar expand="lg" bg="dark" variant="dark">
@@ -21,8 +20,13 @@ const Header = () => {
             </Nav>
           </Navbar.Collapse>
         </Container>
-        <Button variant="outline-info" style={{ marginRight: '10px' }}>Cart</Button>{" "}
-
+        <Button
+          variant="outline-info"
+          style={{ marginRight: '10px' }}
+          onClick={props.handleCartClick} 
+        >
+          Cart
+        </Button>{" "}
       </Navbar>
       <div style={headerStyle}>
         <h1 style={{ color: 'white', fontSize: '2rem' }}>The Generics</h1>

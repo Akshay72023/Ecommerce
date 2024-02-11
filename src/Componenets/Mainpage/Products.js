@@ -37,8 +37,8 @@ const Products = () => {
               key={index}
             >
               <Card.Body>
-                <Card.Title style={{ marginBottom: "15px", textAlign: "center" }}>
-                  {item.title}
+                <Card.Title style={{ marginBottom: "15px", textAlign: "center",fontWeight:"bold" }}>
+                  Album {index + 1}
                 </Card.Title>
                 <Card.Img
                   variant="center"
@@ -73,11 +73,11 @@ const Products = () => {
           {productsArr.slice(2, 4).map((item, index) => (
             <Card
               style={{ width: "18rem", margin: "20px", border: "none" }}
-              key={index + 2}
+              key={index + 3}
             >
               <Card.Body>
-                <Card.Title style={{ marginBottom: "15px", textAlign: "center" }}>
-                  {item.title}
+                <Card.Title style={{ marginBottom: "15px", textAlign: "center" ,fontWeight:"bold"}}>
+                  Album {index + 3}
                 </Card.Title>
                 <Card.Img
                   variant="center"
