@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import React, { Fragment, useContext } from "react";
+import { Button, Card, Row, Col } from "react-bootstrap";
+import CartContext from "../store/cart-context";
 
 const productsArr = [
   {
@@ -26,18 +26,33 @@ const productsArr = [
 ];
 
 const Products = () => {
+  const cartCtx = useContext(CartContext);
+
+  const addItemToCartHandler = (item,index) => {
+    const existingItemIndex = cartCtx.items.findIndex((cartItem) => cartItem.title === `Album${index+1}`);
+
+    if (existingItemIndex !== -1) {
+      const updatedItems = [...cartCtx.items];
+      updatedItems[existingItemIndex].quantity++;
+      cartCtx.updateItemQuantity(updatedItems);
+    } else {
+      cartCtx.addItem({
+        ...item,
+        title:`Album${index+1}`,
+        quantity: 1
+      });
+    }
+  };
+
   return (
     <Fragment>
       <h2 style={{ textAlign: "center" }}>Music</h2>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <div>
-          {productsArr.slice(0, 2).map((item, index) => (
-            <Card
-              style={{ width: "18rem", margin: "20px", border: "none" }}
-              key={index}
-            >
-              <Card.Body>
-                <Card.Title style={{ marginBottom: "15px", textAlign: "center",fontWeight:"bold" }}>
+      <Row>
+        {productsArr.map((item, index) => (
+          <Col key={index} md={6}>
+            <Card style={{ margin: "20px", border: "none" }}>
+              <Card.Body style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <Card.Title style={{ marginBottom: "15px", fontWeight: "bold" }}>
                   Album {index + 1}
                 </Card.Title>
                 <Card.Img
@@ -45,8 +60,9 @@ const Products = () => {
                   src={item.imageUrl}
                   style={{
                     transition: "transform .3s",
-                    width: "90%",
-                    height: "100%",
+                    width: "50%",
+                    height: "auto",
+                    margin: "auto",
                   }}
                   onMouseOver={(e) => {
                     e.currentTarget.style.transform = "scale(1.1)";
@@ -55,60 +71,15 @@ const Products = () => {
                     e.currentTarget.style.transform = "scale(1)";
                   }}
                 />
-                <Card.Text style={{ float: "left", marginTop: "15px" }}>
-                  ${item.price}
-                </Card.Text>
-                <Button
-                  variant="outline-primary"
-                  style={{ float: "right", marginTop: "15px" }}
-                >
-                  Add to Cart
-                </Button>
-                <div style={{ clear: "both" }}></div>
+                <div style={{ marginTop: "15px" }}>
+                  <div>${item.price}</div>
+                  <Button variant="outline-primary" style={{ marginTop: '10px' }} onClick={() => addItemToCartHandler(item,index)}>Add to Cart</Button>
+                </div>
               </Card.Body>
             </Card>
-          ))}
-        </div>
-        <div>
-          {productsArr.slice(2, 4).map((item, index) => (
-            <Card
-              style={{ width: "18rem", margin: "20px", border: "none" }}
-              key={index + 3}
-            >
-              <Card.Body>
-                <Card.Title style={{ marginBottom: "15px", textAlign: "center" ,fontWeight:"bold"}}>
-                  Album {index + 3}
-                </Card.Title>
-                <Card.Img
-                  variant="center"
-                  src={item.imageUrl}
-                  style={{
-                    transition: "transform .3s",
-                    width: "90%",
-                    height: "100%",
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = "scale(1.1)";
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = "scale(1)";
-                  }}
-                />
-                <Card.Text style={{ float: "left", marginTop: "15px" }}>
-                  ${item.price}
-                </Card.Text>
-                <Button
-                  variant="outline-primary"
-                  style={{ float: "right", marginTop: "15px" }}
-                >
-                  Add to Cart
-                </Button>
-                <div style={{ clear: "both" }}></div>
-              </Card.Body>
-            </Card>
-          ))}
-        </div>
-      </div>
+          </Col>
+        ))}
+      </Row>
     </Fragment>
   );
 };
