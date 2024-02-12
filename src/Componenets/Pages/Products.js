@@ -46,6 +46,9 @@ const Products = () => {
 
   return (
     <Fragment>
+      <div style={headerStyle}>
+      <h1 style={{ position: "absolute", top: '30px', color: 'white', fontSize: '5rem' }}>The Generics</h1>
+      </div>
       <h2 style={{ textAlign: "center" }}>Music</h2>
       <div style={{ overflowX: "hidden" }}> 
         <Row>
@@ -85,5 +88,18 @@ const Products = () => {
     </Fragment>
   );
 };
+
+const headerStyle = {
+  backgroundColor: 'gray',
+  padding: '20px 0',
+  textAlign: 'center',
+  alignItems: "center",
+  justifyContent: "center",
+  marginTop: '2px',
+  height: "200px",
+  position: 'relative',
+  display: "flex",
+};
+
 
 export default Products;

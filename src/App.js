@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from "./Componenets/Mainpage/Header";
 import Products from "./Componenets/Pages/Products";
 import About from "./Componenets/Pages/About";
+import Home from './Componenets/Pages/Home';
 import Footer from "./Componenets/Mainpage/Footer";
 import Cart from "./Componenets/Cart/Cart";
 import CartProvider from './Componenets/store/CartProvider';
@@ -22,6 +23,7 @@ function App() {
             <Routes>
               <Route path="/products" element={<Products />} />
               <Route path="/about" element={<About />} />
+              <Route path="/" element={<Home />} />
             </Routes>
           </div>
           <Footer />

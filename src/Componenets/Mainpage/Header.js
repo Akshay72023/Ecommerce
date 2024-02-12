@@ -12,7 +12,7 @@ const Header = (props) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto">
-              <Nav.Link className="mx-3 text-white" href="#home">
+              <Nav.Link className="mx-3 text-white" href="/">
                 Home
               </Nav.Link>
               <Nav.Link className="mx-3 text-white" href="/products">
@@ -32,19 +32,10 @@ const Header = (props) => {
           Cart <span>{quantity}</span>
         </Button>{" "}
       </Navbar>
-      <div style={headerStyle}>
-        <h1 style={{ color: 'white', fontSize: '2rem',widht:"100" }}>The Generics</h1>
-      </div>
     </div>
   );
 };
 
-const headerStyle = {
-  backgroundColor: 'gray',
-  padding: '20px 0',
-  textAlign: 'center',
-  marginTop: '2px',
-  height: "120px"
-};
+
 
 export default Header;
