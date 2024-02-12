@@ -15,10 +15,10 @@ const Header = (props) => {
               <Nav.Link className="mx-3 text-white" href="#home">
                 Home
               </Nav.Link>
-              <Nav.Link className="mx-3 text-white" href="#link">
-                Link
+              <Nav.Link className="mx-3 text-white" href="/products">
+                Store
               </Nav.Link>
-              <Nav.Link className="mx-3 text-white" href="#about">
+              <Nav.Link className="mx-3 text-white" href="/about">
                 About
               </Nav.Link>
             </Nav>
@@ -33,7 +33,7 @@ const Header = (props) => {
         </Button>{" "}
       </Navbar>
       <div style={headerStyle}>
-        <h1 style={{ color: 'white', fontSize: '2rem' }}>The Generics</h1>
+        <h1 style={{ color: 'white', fontSize: '2rem',widht:"100" }}>The Generics</h1>
       </div>
     </div>
   );
@@ -43,7 +43,7 @@ const headerStyle = {
   backgroundColor: 'gray',
   padding: '20px 0',
   textAlign: 'center',
-  margin: '2px',
+  marginTop: '2px',
   height: "120px"
 };
 

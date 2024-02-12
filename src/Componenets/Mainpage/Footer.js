@@ -4,8 +4,8 @@ import { BsYoutube, BsSpotify, BsFacebook} from "react-icons/bs";
 const Footer = () => {
   return (
     <Fragment>
-      <div className="p-1 bg-info text-white d-flex align-items-center ">
-        <p style={{ fontSize: "2em", fontFamily: "bold", marginLeft: "15%" }}>
+      <div className="p-1 bg-info text-white d-flex " style={{width:"100%"}}> 
+        <p style={{ fontSize: "2em", fontFamily: "bold", marginLeft: "15%", marginBottom: 0 }}>
           The Generics
         </p>
         <BsYoutube style={{ marginLeft: "40%" }} size={36} />
@@ -15,4 +15,5 @@ const Footer = () => {
     </Fragment>
   );
 };
+
 export default Footer;

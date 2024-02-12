@@ -5,8 +5,10 @@ import CartContext from '../store/cart-context';
 const Cart = (props) => {
     const cartctx = useContext(CartContext);
     const cartElements = cartctx.items;
-
-    // Calculate the total price
+    const purchaseMade=()=>{
+        alert("Your purchase is successful")
+    }
+    
     const total = cartElements.reduce((accumulator, currentItem) => {
         return accumulator + (currentItem.quantity * currentItem.price);
     }, 0);
@@ -51,6 +53,12 @@ const Cart = (props) => {
                 <Row>
                     <Col style={{ textAlign: 'right' }}>Total ${total.toFixed(2)}</Col>
                 </Row>
+                <Row style={{ display: "flex", flexDirection: "column" }}>
+                    <Col></Col>
+                    <Col>
+                        <Button onClick={()=>purchaseMade()}variant="primary" style={{ textAlign: "center", justifyContent: "center", marginLeft: "70px", marginTop:"20px"}}>Purchase</Button>
+                    </Col>
+                </Row>   
             </Container>
         </div>
     );
