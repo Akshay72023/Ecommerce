@@ -3,6 +3,7 @@ import Header from "./Componenets/Mainpage/Header";
 import Products from "./Componenets/Pages/Products";
 import About from "./Componenets/Pages/About";
 import Home from './Componenets/Pages/Home';
+import ContactUs from './Componenets/Pages/ContactUs';
 import Footer from "./Componenets/Mainpage/Footer";
 import Cart from "./Componenets/Cart/Cart";
 import CartProvider from './Componenets/store/CartProvider';
@@ -24,6 +25,7 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/about" element={<About />} />
               <Route path="/" element={<Home />} />
+              <Route path="/contactus" element={<ContactUs />} />
             </Routes>
           </div>
           <Footer />
