@@ -19,7 +19,7 @@ const Header = (props) => {
                             <Nav.Link className="mx-3 text-white" as={Link} to="/" >
                                 Home
                             </Nav.Link>
-                            <Nav.Link className="mx-3 text-white" as={Link} to="/products" >
+                            <Nav.Link className="mx-3 text-white" as={Link} to="/store" >
                                 Store
                             </Nav.Link>
                             <Nav.Link className="mx-3 text-white" as={Link} to="/about" >

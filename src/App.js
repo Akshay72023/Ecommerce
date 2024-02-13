@@ -4,6 +4,7 @@ import Products from "./Componenets/Pages/Products";
 import About from "./Componenets/Pages/About";
 import Home from './Componenets/Pages/Home';
 import ContactUs from './Componenets/Pages/ContactUs';
+import ProductDetails from './Componenets/Pages/ProductDetails';
 import Footer from "./Componenets/Mainpage/Footer";
 import Cart from "./Componenets/Cart/Cart";
 import CartProvider from './Componenets/store/CartProvider';
@@ -22,10 +23,11 @@ function App() {
           <div style={{ flex: "1" }}>
             <Header handleCartClick={handleCartClick} />
             <Routes>
-              <Route path="/products" element={<Products />} />
+              <Route path="/store" element={<Products />} />
               <Route path="/about" element={<About />} />
               <Route path="/" element={<Home />} />
               <Route path="/contactus" element={<ContactUs />} />
+              <Route path="/product/:productId" element={<ProductDetails />} />
             </Routes>
           </div>
           <Footer />

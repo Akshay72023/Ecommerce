@@ -1,35 +1,14 @@
 import React, { Fragment, useContext } from "react";
 import { Button, Card, Row, Col } from "react-bootstrap";
 import CartContext from "../store/cart-context";
-
-const productsArr = [
-  {
-    title: 'Colors',
-    price: 100,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
-  },
-  {
-    title: 'Black and white Colors',
-    price: 50,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
-  },
-  {
-    title: 'Yellow and Black Colors',
-    price: 70,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
-  },
-  {
-    title: 'Blue Color',
-    price: 100,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
-  }
-];
+import { productsArr } from "../ProductData/Data";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const cartCtx = useContext(CartContext);
 
-  const addItemToCartHandler = (item,index) => {
-    const existingItemIndex = cartCtx.items.findIndex((cartItem) => cartItem.title === `Album${index+1}`);
+  const addItemToCartHandler = (item) => {
+    const existingItemIndex = cartCtx.items.findIndex((cartItem) => cartItem.title === item.title);
 
     if (existingItemIndex !== -1) {
       const updatedItems = [...cartCtx.items];
@@ -38,7 +17,6 @@ const Products = () => {
     } else {
       cartCtx.addItem({
         ...item,
-        title:`Album${index+1}`,
         quantity: 1
       });
     }
@@ -59,25 +37,26 @@ const Products = () => {
                   <Card.Title style={{ marginBottom: "15px", fontWeight: "bold" }}>
                     Album {index + 1}
                   </Card.Title>
-                  <Card.Img
-                    variant="center"
-                    src={item.imageUrl}
-                    style={{
-                      transition: "transform .3s",
-                      width: "50%",
-                      height: "auto",
-                      margin: "auto",
-                    }}
-                    onMouseOver={(e) => {
-                      e.currentTarget.style.transform = "scale(1.1)";
-                    }}
-                    onMouseOut={(e) => {
-                      e.currentTarget.style.transform = "scale(1)";
-                    }}
-                  />
+                  <Link to={`/product/${item.id}`}>
+                    <Card.Img
+                      variant="center"
+                      src={item.imageUrl}
+                      style={{
+                        transition: "transform .3s",
+                        width: "100%",
+                        height: "auto",
+                        margin: "auto",
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.transform = "scale(1.1)";
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.transform = "scale(1)";
+                      }}/>
+                  </Link>
                   <div style={{ marginTop: "15px",display:"flex", justifyContent:"center" ,alignItems:"center"}}>
                     <div style={{marginLeft:"10px",marginTop: '5px'}}>${item.price}</div>
-                    <Button variant="outline-primary" style={{marginLeft:"10px", marginTop: '10px' }} onClick={() => addItemToCartHandler(item,index)}>Add to Cart</Button>
+                    <Button variant="outline-primary" style={{marginLeft:"10px", marginTop: '10px' }} onClick={() => addItemToCartHandler(item)}>Add to Cart</Button>
                   </div>
                 </Card.Body>
               </Card>
