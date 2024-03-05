@@ -14,18 +14,42 @@ const Products = () => {
       const updatedItems = [...cartCtx.items];
       updatedItems[existingItemIndex].quantity++;
       cartCtx.updateItemQuantity(updatedItems);
+      console.log(updatedItems);
+      updateCartInAPI(updatedItems);
     } else {
-      cartCtx.addItem({
+      const newItem = {
         ...item,
         quantity: 1
+      };
+      cartCtx.addItem(newItem);
+      console.log(newItem);
+      updateCartInAPI([...cartCtx.items, newItem]);
+    }
+  };
+
+  const updateCartInAPI = async (cartItems) => {
+    const email = localStorage.getItem('email');
+    try {
+      const response = await fetch(`${email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cartItems),
       });
+  
+      if (!response.ok) {
+        throw new Error('Failed to update cart.');
+      }
+    } catch (error) {
+      console.error('Error updating cart:', error);
     }
   };
 
   return (
     <Fragment>
       <div style={headerStyle}>
-      <h1 style={{ position: "absolute", top: '30px', color: 'white', fontSize: '5rem' }}>The Generics</h1>
+        <h1 style={{ position: "absolute", top: '30px', color: 'white', fontSize: '5rem' }}>The Generics</h1>
       </div>
       <h2 style={{ textAlign: "center" }}>Music</h2>
       <div style={{ overflowX: "hidden" }}> 
