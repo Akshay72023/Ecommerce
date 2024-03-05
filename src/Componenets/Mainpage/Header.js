@@ -1,14 +1,22 @@
 import React from 'react';
 import { Navbar, Container, Button, Nav } from "react-bootstrap";
-import { Link } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; 
 import CartContext from '../store/cart-context';
+import AuthContext from '../store/auth-context';
 import { useContext } from 'react';
-
 
 const Header = (props) => {
     const cartctx = useContext(CartContext);
+    const authCtx = useContext(AuthContext);
     const quantity = cartctx.cartNumber;
-  
+    const isLoggedIn = authCtx.isLoggedIn;
+    const navigate = useNavigate(); 
+
+    const logoutHandler = () => {
+        authCtx.logout();
+        navigate('/login'); 
+    }
+
     return (
         <div>
             <Navbar expand="lg" bg="dark" variant="dark">
@@ -28,6 +36,14 @@ const Header = (props) => {
                             <Nav.Link className="mx-3 text-white" as={Link} to="/contactus">
                                 Contact Us
                             </Nav.Link>
+                            {!isLoggedIn && 
+                                <Nav.Link className="mx-3 text-white" as={Link} to="/login">
+                                    Login
+                                </Nav.Link>
+                            }
+                            {isLoggedIn && 
+                                <Button onClick={logoutHandler}>Logout</Button>
+                            }
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
