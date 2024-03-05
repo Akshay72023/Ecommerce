@@ -1,12 +1,13 @@
-import { useState, useRef, useContext } from 'react';
-import { Navigate } from 'react-router-dom'; 
+import React, { useState, useRef, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classes from './Login.module.css';
 import AuthContext from '../store/auth-context';
 
 const Login = () => {
-  const authCtx= useContext(AuthContext);
+    const authCtx = useContext(AuthContext);
+    const navigate = useNavigate(); 
     const [isLoading, setIsLoading] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false); 
+    const [loginError, setLoginError] = useState(null);
     const emailInputRef = useRef('');
     const passwordInputRef = useRef('');
 
@@ -34,15 +35,14 @@ const Login = () => {
             return res.json();
         })
         .then(data => {
-           authCtx.login(data.idToken);
-            setIsLoggedIn(true); 
+            authCtx.login(data.idToken);
+            navigate('/store'); 
         })
         .catch(error => {
-            alert('Authentication failed! Please try again.');
+            setLoginError(error.message || 'Authentication failed! Please try again.');
+            setIsLoading(false);
         });
-    }
-    if (isLoggedIn) {
-        return <Navigate to="/store" />;
+
     }
 
     return (
@@ -57,6 +57,7 @@ const Login = () => {
                     <label htmlFor='password'>Your Password</label>
                     <input type='password' id='password' required ref={passwordInputRef} />
                 </div>
+                {loginError && <p className={classes.error}>{loginError}</p>}
                 <div className={classes.actions}>
                     {!isLoading && <button>Login</button>}
                     {isLoading && <p>Sending request....</p>}
